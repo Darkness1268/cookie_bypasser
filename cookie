@@ -1,0 +1,24 @@
+# Facebook Cookie Extractor
+
+import requests
+
+def extract_facebook_cookie(uid):
+    url = f"https://www.facebook.com/{uid}"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        cookies = response.cookies.get_dict()
+        return cookies
+    else:
+        return None
+
+if _name_ == "_main_":
+    target_uid = input("Enter the Facebook UID of the target: ")
+    cookies = extract_facebook_cookie(target_uid)
+    
+    if cookies:
+        print("Extracted Cookies:")
+        for key, value in cookies.items():
+            print(f"{key}: {value}")
+    else:
+        print("Failed to extract cookies.")
